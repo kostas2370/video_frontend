@@ -9,7 +9,9 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "cross-env": "^7.0.3",
     "date-fns": "^3.6.0",
+    "flowbite-react": "^0.10.1",
     "heroicons": "^2.1.5",
     "install": "^0.13.0",
     "jwt-decode": "^4.0.0",
@@ -18,11 +20,13 @@
     "react": "18.2.0",
     "react-datepicker": "^7.3.0",
     "react-dom": "18.2.0",
+    "react-icons": "^5.2.1",
     "react-loading": "^2.0.3",
     "react-password-checklist": "^1.6.0",
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
+    "rsuite": "^5.69.0",
     "use-react-countries": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -52,8 +56,9 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.14",
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.7"
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.9"
   }
 }

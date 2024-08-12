@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -75,31 +76,28 @@ function Navbar() {
                   <NavLink
                     exact
                     to="/"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    activeClassName="bg-gray-900 text-white"
+                    className={(navData) => navData.isActive ? 'rounded-md px-3 py-2 text-sm font-medium bg-gray-900 text-white' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
+                    
                   >
                     Generation
                   </NavLink>
 
                   <NavLink
                     to="/twitch"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    activeClassName="bg-gray-900 text-white"
+                    className={(navData) => navData.isActive ? 'rounded-md px-3 py-2 text-sm font-medium bg-gray-900 text-white' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
                   >
                     Twitch Generation
                   </NavLink>
 
                   <NavLink
                     to="/avatars"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    activeClassName="bg-gray-900 text-white"
+                    className={(navData) => navData.isActive ? 'rounded-md px-3 py-2 text-sm font-medium bg-gray-900 text-white' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
                   >
                     Avatars
                   </NavLink>
                   <NavLink
                     to="/videos"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    activeClassName="bg-gray-900 text-white"
+                    className={(navData) => navData.isActive ? 'rounded-md px-3 py-2 text-sm font-medium bg-gray-900 text-white' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
                   >
                     My videos
                   </NavLink>
@@ -199,31 +197,32 @@ function Navbar() {
               <NavLink 
                 exact
                 to="/"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                activeClassName="bg-gray-900 text-white"
+                className={(navData) => navData.isActive ? 'block rounded-md px-3 py-2 text-base font-medium bg-gray-900 text-white' : 'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
+
                 aria-current="page"
+
               >
                 Generation
               </NavLink>
               <NavLink
                 to="/twitch"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                activeClassName="bg-gray-900 text-white"
+                className={(navData) => navData.isActive ? 'block rounded-md px-3 py-2 text-base font-medium bg-gray-900 text-white' : 'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
+
               >
                 Twitch Generation
               </NavLink>
 
               <NavLink
                 to="/avatars"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                activeClassName="bg-gray-900 text-white"
+                className={(navData) => navData.isActive ? 'block rounded-md px-3 py-2 text-base font-medium bg-gray-900 text-white' : 'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
+
               >
                 Avatars
               </NavLink>
               <NavLink
                 to="/videos"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                activeClassName="bg-gray-900 text-white"
+                className={(navData) => navData.isActive ? 'block rounded-md px-3 py-2 text-base font-medium bg-gray-900 text-white' : 'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white' }
+
               >
                 My videos
               </NavLink>

@@ -10,14 +10,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+    
     <Router>
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <App />
     <ToastContainer />
     </Router>
 
-  </React.StrictMode>
 );
 
 

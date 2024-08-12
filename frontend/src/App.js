@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom";
 
-import Login from "./components/Login";
-import Home from "./components/home";
-import Register from "./components/Register";
-import Navbar from "./components/myNavBar";
-import Twitch from "./components/twitch";
+import Login from "./components/LoginPage";
+import Home from "./components/HomePage"
+import Register from "./components/RegisterPage";
+import Navbar from "./components/general/myNavBar";
+import Twitch from "./components/TwitchPage";
+import { Avatar } from "./components/AvatarPage";
 function App() {
   const location = useLocation();
 
@@ -18,16 +18,20 @@ function App() {
     location.pathname !== "/login/" && location.pathname !== "/register";
 
   return (
-    <>
+    <div className="">
       {shouldShowNavbar ? <Navbar /> : <></>}
 
-      <Routes>
+      <Routes class="w-screen">
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/twitch" element={<Twitch />} />
+        <Route path="/avatars" element={<Avatar />} />
+
+
+
         <Route path="/" element={<Home />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -4,8 +4,7 @@ import {
   Dialog,
   DialogHeader,
   DialogBody,
-  DialogFooter,
-  Typography,
+  DialogFooter
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
  
