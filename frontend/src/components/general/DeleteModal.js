@@ -1,9 +1,8 @@
 import React from "react";
-import { deleteAvatar } from "../../api/apiService";
 import { toast } from "react-toastify";
-export function DeleteModal({showModal, setShowModal, id, setItems}) {
+export function DeleteModal({showModal, setShowModal, id, setItems, deleteFunction , name}) {
     const DeleteClick = (event) => {
-        deleteAvatar(id).then((response)=>{
+      deleteFunction(id).then((response)=>{
             toast.success("Avatar deleted sucessfully")
             setItems(prevItems => prevItems.filter(item => item.id !== id));
             setShowModal(false)
@@ -58,7 +57,7 @@ export function DeleteModal({showModal, setShowModal, id, setItems}) {
                   ></path>
                 </svg>
                 <p class="mb-4 text-gray-500 dark:text-gray-300">
-                  Are you sure you want to delete this item?
+                  Are you sure you want to delete this {name}?
                 </p>
                 <div class="flex justify-center items-center space-x-4">
                   <button

@@ -85,4 +85,35 @@ export const deleteAvatar = async (id) =>  {
     }
 };
 
+export const getVideos = async (search, page) => {
+    try {
 
+        var url = "video/?"
+        if (search){
+            url = url+"search=" +search
+        }
+        if (page){
+            url = url+"&page=" +page
+        }
+
+
+        const response = await httpClient.get(url); // replace with your endpoint
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};
+
+export const deleteVideo = async (id) =>  {
+    try {
+
+        var url = "video/" + id +"/"
+      
+        const response = await httpClient.delete(url); // replace with your endpoint
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};

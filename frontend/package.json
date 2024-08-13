@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",

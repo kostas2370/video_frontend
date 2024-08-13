@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { DeleteModal } from "./DeleteModal";
+import { deleteAvatar } from "../../api/apiService";
 
 export const Card = ({ imageSrc, title, audioSrc, id , avatars, setAvatars }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -14,6 +15,8 @@ export const Card = ({ imageSrc, title, audioSrc, id , avatars, setAvatars }) =>
             setShowModal = {setShowDeleteModal}
             id = {id}
             setItems={setAvatars}
+            deleteFunction={deleteAvatar}
+            name = "avatar"
           />
         </>
       ) : (

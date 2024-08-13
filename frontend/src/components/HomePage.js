@@ -76,7 +76,7 @@ const Home = () => {
     <div>
 
       <ProceedModal open={open} setOpen={isOpenFunction} video_id={video_id} />
-
+      
       <br></br>
 
       <section class="bg-gray-50 dark:bg-gray-900 ">
@@ -126,7 +126,7 @@ const Home = () => {
                             type="text"
                             id="target_audience"
                             placeholder="Teens"
-                            class="px-1 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="px-1 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-11/12"
                             onChange={handleInputChange}
                           ></input>
                         </div>
@@ -142,15 +142,15 @@ const Home = () => {
                             type="text"
                             id="template_id"
                             placeholder="Comedy"
-                            class="px-1 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="px-1 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-11/12"
                             onChange={handleInputChange}
                           ></input>
                         </div>
                       </div>
 
                       <br></br>
-                      <div class="flex space-x-4">
-                        <div class="space-y-1">
+                      <div class="flex space-x-4 gap-4">
+                        <div class="space-y-1 ">
                           <label
                             for="avatar_selection"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -161,7 +161,7 @@ const Home = () => {
                             name="avatar_selection"
                             id="avatar_selection"
                             placeholder="Comedy"
-                            class="px-5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="px-5 bg-gray-50  border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-40 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required=""
                             onChange={handleInputChange}
                           >
@@ -182,7 +182,7 @@ const Home = () => {
                         <div class="flex flex-col space-y-2">
                           <label
                             for="target_audience"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            class="block text-sm font-medium text-gray-900 dark:text-white w-44"
                           >
                             AI model :
                           </label>
@@ -190,7 +190,7 @@ const Home = () => {
                             name="gpt_model"
                             id="avatar_selection"
                             placeholder="Comedy"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-40 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required=""
                             onChange={handleInputChange}
                           >

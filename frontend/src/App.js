@@ -11,6 +11,7 @@ import Register from "./components/RegisterPage";
 import Navbar from "./components/general/myNavBar";
 import Twitch from "./components/TwitchPage";
 import { Avatar } from "./components/AvatarPage";
+import { Videos } from "./components/VideosPage";
 function App() {
   const location = useLocation();
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/twitch" element={<Twitch />} />
         <Route path="/avatars" element={<Avatar />} />
+        <Route path="/videos" element={<Videos />} />
 
 
 
