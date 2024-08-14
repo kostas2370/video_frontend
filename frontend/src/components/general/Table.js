@@ -4,14 +4,16 @@ import { FaRegEye, FaPencilAlt, FaYoutube } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { DeleteModal} from "./DeleteModal";
 import { deleteVideo } from "../../api/apiService";
+import { VideoInfoModal } from "./VideoInfoModal";
 const TABLE_HEAD = ["Video Title", "Status", "Video Type", "Actions"];
 
 
-export function DefaultTable({ data, setVideos }) {
+export function DefaultTable({ data, setVideos, loaded }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
   const [id, setId] = useState("");
+  const [videoInfo, setVideoInfo] = useState(null);
 
 
   return (<>
@@ -35,7 +37,7 @@ export function DefaultTable({ data, setVideos }) {
         </>
       )}
 
-
+    <VideoInfoModal showModal={showVideoModal} setShowModal={setShowVideoModal} videoInfo={videoInfo}/>
       
     <Card className="h-full w-full overflow-y-scroll no-scrollbar">
       <table className="w-full h-full min-w-max table-auto text-left scroll-smooth min-h-max">
@@ -58,7 +60,7 @@ export function DefaultTable({ data, setVideos }) {
           </tr>
         </thead>
         <tbody>
-          {data.map(({ title, status, video_type, output, id }, index) => {
+          {data.map(({ title, status, video_type, output, id, prompt, music, gpt_answer }, index) => {
             const isLast = index === data.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
             const isCompleted = status === "COMPLETED";
@@ -76,7 +78,7 @@ export function DefaultTable({ data, setVideos }) {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal text-center font-bold"
+                    className=" text-center font-bold"
                   >
                     {title}
                   </Typography>
@@ -106,7 +108,7 @@ export function DefaultTable({ data, setVideos }) {
                     className="font-medium text-center"
                   >
                     <div className="grid grid-cols-4">
-                      <FaRegEye className="w-5 h-5 text-blue-500 hover:text-blue-300" />
+                      <FaRegEye className="w-5 h-5 text-blue-500 hover:text-blue-300" onClick={(e) => {setVideoInfo({title:title, prompt:prompt, gpt_answer:gpt_answer, music:music, output:output}) ; setShowVideoModal(true)}}/>
                       <FaPencilAlt className={`w-5 h-5 ${pencilIcon}`} />
                       <FaYoutube
                         onClick={(event) => {

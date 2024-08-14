@@ -3,6 +3,7 @@ import { DefaultTable } from "./general/Table";
 import useAuth from "../useAuth";
 import { getVideos } from "../api/apiService";
 import { Search } from "@rsuite/icons";
+
 import { useSearchParams } from "react-router-dom";
 
 export const Videos = () => {
@@ -12,9 +13,12 @@ export const Videos = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [previousPage, setPreviousPage] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+
 
 
   const [nextPage, setNextPage] = useState(null);
+  
 
   const setter = (page, response)=> {
       setCurrentPage(page);
