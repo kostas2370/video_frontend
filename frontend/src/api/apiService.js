@@ -117,3 +117,18 @@ export const deleteVideo = async (id) =>  {
         
     }
 };
+
+export const renderVideo = async (id) => {
+    try {
+        var url = "video/" + id +"/render_video/"
+      
+        const response = await httpClient.patch(url); // replace with your endpoint
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+
+
+
+}

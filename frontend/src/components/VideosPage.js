@@ -3,70 +3,51 @@ import { DefaultTable } from "./general/Table";
 import useAuth from "../useAuth";
 import { getVideos } from "../api/apiService";
 import { Search } from "@rsuite/icons";
-
 import { useSearchParams } from "react-router-dom";
 
 export const Videos = () => {
-  useAuth();
+  const [searchParam, setSearchParam] = useSearchParams()
 
   const [videos, setVideos] = useState([]);
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState(searchParam.get("search"));
+  const [currentPage, setCurrentPage] = useState(searchParam.get("page"));
   const [previousPage, setPreviousPage] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-
-
-
+  const [searchClick, setSearchClick] = useState(false);
   const [nextPage, setNextPage] = useState(null);
-  
+  const [isLoading, setIsLoading] = useState(false)
 
-  const setter = (page, response)=> {
-      setCurrentPage(page);
-      setNextPage(response.next);
-      setPreviousPage(response.previous);
-      setVideos(response.results);
-
-  }
-
-  const NextClick = async () => {
-    setVideos([]);
-    getVideos(search, nextPage).then((response) => {
-      setter(nextPage,response)
-    });
+  const SearchClick = () => {
+    setCurrentPage(1);
+    setSearchParam({page:1, search:search?? ""})
+    setSearchClick(true);
   };
 
-  const PreviousClick = async () => {
+  const fetchVideos = async () => {
     setVideos([]);
+    setIsLoading(true)
+    getVideos(search, currentPage).then((response) => {
+      if (response){
+        setVideos(response.results);
+        setNextPage(response.next);
+        setPreviousPage(response.previous);
+        setIsLoading(false)
 
-    getVideos(search, previousPage).then((response) => {
-      setter(previousPage,response)
-;
-    });
-  };
-
-  const SearchClick = async () => {
-    setVideos([]);
-    getVideos(search).then((response) => {
-      setCurrentPage(1);
-      setNextPage(response.next);
-      setPreviousPage(null);
-      setVideos(response.results);
+      }
     });
   };
 
   useEffect(() => {
-    const fetchVideos = async () => {
-   
-      getVideos(search, currentPage).then((response) => {
-        setVideos(response.results);
-        setNextPage(response.next)
-        setPreviousPage(response.previous)
+    if (!searchClick) {
+      fetchVideos();
+    }
+  }, [currentPage]);
 
-      });
-    };
-
-    fetchVideos();
-  }, []);
+  useEffect(() => {
+    if (searchClick) {
+      setSearchClick(false);
+      fetchVideos();
+    }
+  }, [searchClick]);
 
   return (
     <>
@@ -77,6 +58,9 @@ export const Videos = () => {
             placeholder="Search Videos"
             className="pl-12 w-64 px-9 py-2  border rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
             onChange={(e) => setSearch(e.target.value)}
+
+              
+             
           />
           <div className="absolute inset-y-2 left-2 flex items-center pl-3 pointer-events-none">
             <Search className="text-gray-500" />
@@ -95,12 +79,13 @@ export const Videos = () => {
       <div className="flex flex-col items-center  px-6 py-8 mx-auto md:h-3/5 lg:py-0 w-3/4  mt-4">
         <DefaultTable data={videos} setVideos={setVideos} />
         <div className="flex flex-col-2 gap-8 mt-4 ">
-          {previousPage ? (
+          {previousPage && !isLoading ? (
             <>
               <button
                 className="bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 rounded-lg focus:ring-blue-600 h-12 w-22"
                 onClick={(e) => {
-                  PreviousClick();
+                  setCurrentPage(previousPage);
+                  setSearchParam({page:previousPage, search:search ?? ""})
                 }}
               >
                 Previous
@@ -109,12 +94,14 @@ export const Videos = () => {
           ) : (
             <></>
           )}
-          {nextPage ? (
+          {nextPage && !isLoading ? (
             <>
               <button
                 className="bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 rounded-lg focus:ring-blue-600 h-12 w-22"
                 onClick={(e) => {
-                  NextClick();
+                  setCurrentPage(nextPage);
+                  setSearchParam({page:nextPage, search:search?? ""})
+
                 }}
               >
                 Next

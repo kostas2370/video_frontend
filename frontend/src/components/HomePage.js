@@ -10,7 +10,6 @@ const Home = () => {
   const isOpenFunction = (data) => {
     setOpen(data);
   };
-  useAuth();
   const [avatars, setAvatars] = useState("");
   const [settings, setSettings] = useState(false);
   const [open, setOpen] = useState(false);

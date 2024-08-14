@@ -1,16 +1,20 @@
 import { Card, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { FaRegEye, FaPencilAlt, FaYoutube } from "react-icons/fa";
+import {  useState } from "react";
+import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { DeleteModal} from "./DeleteModal";
 import { deleteVideo } from "../../api/apiService";
 import { VideoInfoModal } from "./VideoInfoModal";
+import { GiProcessor } from "react-icons/gi";
+import { RenderModal } from "./RenderModal";
 const TABLE_HEAD = ["Video Title", "Status", "Video Type", "Actions"];
 
 
 export function DefaultTable({ data, setVideos, loaded }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [showRenderModal, setShowRenderModal] = useState(false);
+
 
   const [id, setId] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
@@ -18,9 +22,7 @@ export function DefaultTable({ data, setVideos, loaded }) {
 
   return (<>
 
-    {showDeleteModal ? (
-        <>
-
+  
           <DeleteModal
             showModal={showDeleteModal}
             setShowModal = {setShowDeleteModal}
@@ -29,13 +31,17 @@ export function DefaultTable({ data, setVideos, loaded }) {
             deleteFunction = {deleteVideo}
             name = "video"
           />
-        </>
-      ) : (
-        <>
-        
-        
-        </>
-      )}
+     
+
+
+          <RenderModal
+            showModal={showRenderModal}
+            setShowModal = {setShowRenderModal}
+            id = {id}
+            setItems={setVideos}
+            name = "video"
+          />
+     
 
     <VideoInfoModal showModal={showVideoModal} setShowModal={setShowVideoModal} videoInfo={videoInfo}/>
       
@@ -60,17 +66,26 @@ export function DefaultTable({ data, setVideos, loaded }) {
           </tr>
         </thead>
         <tbody>
+          
           {data.map(({ title, status, video_type, output, id, prompt, music, gpt_answer }, index) => {
             const isLast = index === data.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
             const isCompleted = status === "COMPLETED";
-            const youtubeIconColor = isCompleted
-              ? "text-red-500 hover:text-red-300"
+            const isRenderable = isCompleted || status === "READY" ;
+
+            const renderIconColor = isRenderable
+              ? "text-purple-500 hover:text-red-300"
               : "text-gray-400 ";
+
             const pencilIcon =
               status === "READY" || isCompleted
-                ? "text-orange-500 text-orange-300"
+                ? "text-orange-500 hover:text-orange-300"
                 : "text-gray-400 disabled";
+
+              const deleteIcon =
+                status !== "RENDERING"
+                  ? "text-red-500 hover:text-red-300"
+                  : "text-gray-400 disabled";
 
             return (
               <tr key={title}>
@@ -108,19 +123,30 @@ export function DefaultTable({ data, setVideos, loaded }) {
                     className="font-medium text-center"
                   >
                     <div className="grid grid-cols-4">
-                      <FaRegEye className="w-5 h-5 text-blue-500 hover:text-blue-300" onClick={(e) => {setVideoInfo({title:title, prompt:prompt, gpt_answer:gpt_answer, music:music, output:output}) ; setShowVideoModal(true)}}/>
+                      <FaRegEye className="w-5 h-5 text-blue-500 hover:text-blue-300" onClick={(e) => { 
+
+                        
+                        
+                        setVideoInfo({title:title, prompt:prompt, gpt_answer:gpt_answer, music:music, output:output}) ; setShowVideoModal(true)}}/>
                       <FaPencilAlt className={`w-5 h-5 ${pencilIcon}`} />
-                      <FaYoutube
+                      <GiProcessor
                         onClick={(event) => {
-                          window.open(output, "_blank");
+                          if (status!== "RENDERING"){
+                            setId(id)
+                            setShowRenderModal(true)
+                          }
+                         
                         }}
-                        className={`w-5 h-5 ${youtubeIconColor}`}
+                        className={`w-5 h-5 ${renderIconColor}`}
                       />
                       <RiDeleteBin6Fill
-                        className="w-5 h-5 text-red-500 hover:text-red-300 text-center"
+                        className={`w-5 h-5 ${deleteIcon} text-center`}
                         onClick={(event) => {
-                         setShowDeleteModal(true)
-                         setId(id)
+                          if (status!== "RENDERING"){
+                            setShowDeleteModal(true)
+                            setId(id)
+                          }
+                        
                         }}
                       />
                     </div>

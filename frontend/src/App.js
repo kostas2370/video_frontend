@@ -12,9 +12,12 @@ import Navbar from "./components/general/myNavBar";
 import Twitch from "./components/TwitchPage";
 import { Avatar } from "./components/AvatarPage";
 import { Videos } from "./components/VideosPage";
+import useAuth from "./useAuth";
 function App() {
-  const location = useLocation();
 
+  useAuth()
+  const location = useLocation();
+  
   const shouldShowNavbar =
     location.pathname !== "/login/" && location.pathname !== "/register";
 
@@ -23,15 +26,17 @@ function App() {
       {shouldShowNavbar ? <Navbar /> : <></>}
 
       <Routes class="w-screen">
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/twitch" element={<Twitch />} />
-        <Route path="/avatars" element={<Avatar />} />
-        <Route path="/videos" element={<Videos />} />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/register/" element={<Register />} />
+        <Route path="/twitch/" element={<Twitch />} />
+        <Route path="/avatars/" element={<Avatar />} />
+        <Route path="/videos/" element={<Videos />} />
 
 
 
         <Route path="/" element={<Home />} />
+        <Route path="*" element={<>Not found</>} />
+
       </Routes>
     </div>
   );

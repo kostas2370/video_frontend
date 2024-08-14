@@ -8,7 +8,6 @@ import { ProceedModal } from "./general/ProceedModal";
 
 
 const Twitch = () => {
-  useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [video_id, setVideo_id]= useState("")
