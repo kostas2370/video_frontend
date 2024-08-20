@@ -14,6 +14,7 @@ export function RenderModal({ showModal, setShowModal, id, setItems, name }) {
     toast.info("Video now is on rendering status");
 
     renderVideo(id).then((response) => {
+      if(response){
       setItems((prevItems) =>
         prevItems.map((item) =>
           item.id === id
@@ -24,7 +25,16 @@ export function RenderModal({ showModal, setShowModal, id, setItems, name }) {
       );
       toast.success("Video now is completed");
 
-    }
+    }else{
+        setItems((prevItems) =>
+            prevItems.map((item) =>
+              item.id === id
+                ? { ...item, status: "FAILED"}
+                : item
+            )
+            
+          );
+    }}
 
 );
   };

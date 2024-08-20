@@ -1,11 +1,21 @@
 import React from "react";
 import { toast } from "react-toastify";
-export function DeleteModal({showModal, setShowModal, id, setItems, deleteFunction , name}) {
+export function DeleteModal({showModal, setShowModal, id, setItems, deleteFunction , name, mode="normal"}) {
     const DeleteClick = (event) => {
       deleteFunction(id).then((response)=>{
-            toast.success("Avatar deleted sucessfully")
-            setItems(prevItems => prevItems.filter(item => item.id !== id));
-            setShowModal(false)
+            if (mode==="normal"){
+              toast.success(name+" deleted sucessfully")
+              setItems(prevItems => prevItems.filter(item => item.id !== id));
+              setShowModal(false)
+            }else{
+              toast.success(name+" deleted sucessfully")
+              setItems(true)
+              setShowModal(false)
+
+
+
+            }
+          
         })
 
     }

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export function ProceedModal({open,setOpen, video_id}) {
   const navigate = useNavigate();
   
-  const HandleVideo = () => navigate("video/"+video_id)
+  const HandleVideo = () => navigate(`/videos/${video_id}`);
   
   const handleOpen = () => setOpen(!open);
   if (!open){

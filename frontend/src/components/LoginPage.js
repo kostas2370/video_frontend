@@ -35,8 +35,8 @@ const Login = () => {
       };
 
       axios.post(LOGIN_URL,data).then(response => {
-        const data =  response.data;
-        localStorage.setItem("token", data.tokens.access);
+        const data =  response?.data;
+        localStorage.setItem("token", data?.tokens?.access);
         toast.success("Login succesfully");
         navigate("/");
       }).catch(error => {

@@ -41,9 +41,6 @@ export const AvatarCreationModal = ({ showModal, setShowModal, setAvatars }) => 
         setAvatars(prevAvatars => [...prevAvatars, response]);
         toast.success("Avatar got created sucessfully !");
           setShowModal(false)
-
-    
-
       }
 
     })

@@ -128,7 +128,60 @@ export const renderVideo = async (id) => {
         console.error('Error fetching data:', error);
         
     }
-
-
-
 }
+
+
+export const getVideo = async (id) =>  {
+    try {
+
+        var url = "video/" + id +"/"
+      
+        const response = await httpClient.get(url); // replace with your endpoint
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};
+
+export const deleteImageScene = async (id) =>  {
+    try {
+
+        var url = "scene_image/" + id +"/"
+      
+        const response = await httpClient.delete(url); // replace with your endpoint
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};
+
+
+export const getIntro = async () => {
+    try {
+
+        var url = "intro/"
+      
+        const response = await httpClient.get(url); 
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};
+
+
+
+export const getOutro = async () => {
+    try {
+
+        var url = "outro/"
+      
+        const response = await httpClient.get(url); 
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+};

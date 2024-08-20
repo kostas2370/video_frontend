@@ -7,17 +7,22 @@ import { deleteVideo } from "../../api/apiService";
 import { VideoInfoModal } from "./VideoInfoModal";
 import { GiProcessor } from "react-icons/gi";
 import { RenderModal } from "./RenderModal";
+import { useNavigate } from "react-router-dom";
+
 const TABLE_HEAD = ["Video Title", "Status", "Video Type", "Actions"];
 
 
 export function DefaultTable({ data, setVideos, loaded }) {
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [showRenderModal, setShowRenderModal] = useState(false);
+  const navigate = useNavigate();
 
 
   const [id, setId] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
+
 
 
   return (<>
@@ -45,14 +50,14 @@ export function DefaultTable({ data, setVideos, loaded }) {
 
     <VideoInfoModal showModal={showVideoModal} setShowModal={setShowVideoModal} videoInfo={videoInfo}/>
       
-    <Card className="h-full w-full overflow-y-scroll no-scrollbar">
-      <table className="w-full h-full min-w-max table-auto text-left scroll-smooth min-h-max">
+    <Card className="h-full w-full overflow-y-scroll ">
+      <table className="w-full h-full min-w-max table-auto text-center scroll-smooth min-h-max">
         <thead>
           <tr>
             {TABLE_HEAD.map((head) => (
               <th
                 key={head}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 text-center"
+                className="border-b border-blue-gray-100 bg-blue-gray-50 pt-4 pb-4 text-center"
               >
                 <Typography
                   variant="small"
@@ -128,10 +133,15 @@ export function DefaultTable({ data, setVideos, loaded }) {
                         
                         
                         setVideoInfo({title:title, prompt:prompt, gpt_answer:gpt_answer, music:music, output:output}) ; setShowVideoModal(true)}}/>
-                      <FaPencilAlt className={`w-5 h-5 ${pencilIcon}`} />
+                      <FaPencilAlt className={`w-5 h-5 ${pencilIcon}`} onClick={
+                        (event) => {
+                          navigate("/videos/"+id+"/")
+                        }
+
+                      }/>
                       <GiProcessor
                         onClick={(event) => {
-                          if (status!== "RENDERING"){
+                          if (status!== "RENDERING" && status!=="FAILED"){
                             setId(id)
                             setShowRenderModal(true)
                           }

@@ -76,9 +76,9 @@ export const Videos = () => {
         </button>
       </div>
 
-      <div className="flex flex-col items-center  px-6 py-8 mx-auto md:h-3/5 lg:py-0 w-3/4  mt-4">
+      <div className="flex flex-col items-center  px-6 py-8 mx-auto md:h-3/5 lg:py-0  lg:h-3/5 w-3/4  mt-4">
         <DefaultTable data={videos} setVideos={setVideos} />
-        <div className="flex flex-col-2 gap-8 mt-4 ">
+        <div className="flex flex-col-2 gap-8 mt-4 pb-4 ">
           {previousPage && !isLoading ? (
             <>
               <button

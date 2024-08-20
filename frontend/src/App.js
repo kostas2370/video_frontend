@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
   useLocation,
+  useParams 
 } from "react-router-dom";
 
 import Login from "./components/LoginPage";
@@ -13,10 +14,13 @@ import Twitch from "./components/TwitchPage";
 import { Avatar } from "./components/AvatarPage";
 import { Videos } from "./components/VideosPage";
 import useAuth from "./useAuth";
+import { Video } from "./components/VideoPage";
 function App() {
 
   useAuth()
   const location = useLocation();
+  let { videoId } = useParams();
+
   
   const shouldShowNavbar =
     location.pathname !== "/login/" && location.pathname !== "/register";
@@ -31,6 +35,8 @@ function App() {
         <Route path="/twitch/" element={<Twitch />} />
         <Route path="/avatars/" element={<Avatar />} />
         <Route path="/videos/" element={<Videos />} />
+        <Route path="/videos/:videoId/" element={<Video/>} />
+
 
 
 

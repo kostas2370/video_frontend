@@ -35,7 +35,10 @@ export const SetupInterceptors = http => {
         if (status === 400){
             toast.error("400 Bad Request !")
             return Promise.reject(error)
-
+        }
+        if (status === 404){
+            toast.error("404 Not Found !")
+            return Promise.reject(error)
         }
 
         
