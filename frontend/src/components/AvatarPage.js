@@ -67,9 +67,9 @@ export const Avatar = () => {
       </div>
 
       <div className="bg-gray-100 p-2 grid  grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-6 mr-6 mt-4 ">
-        {avatars.length > 0 ? (
+        {avatars?.length > 0 ? (
           <>
-            {avatars.map((avatar) => (
+            {avatars?.map((avatar) => (
               <div className="mt-4 ml-20">
                 <Card
                   imageSrc={avatar.file}

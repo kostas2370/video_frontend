@@ -1,5 +1,5 @@
 import httpClient from "./axiosPrivate";
-// Example function to get data from an API endpoint
+
 
 export const generateVideo = async (data) => {
     try{
@@ -185,3 +185,50 @@ export const getOutro = async () => {
         
     }
 };
+
+
+export const updateVideo = async (id,data) => {
+    try{
+        var url = "video/" + id +"/"
+        const response = await httpClient.patch(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
+}
+
+
+export const updateScene = async (id, data) => {
+
+    try{
+        var url = "scene/" + id +"/"
+        const response = await httpClient.patch(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
+    
+}
+
+
+
+export const generateScene = async (id, data) => {
+
+    try{
+        var url = "scene/" + id +"/generate/"
+        const response = await httpClient.patch(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
+    
+}

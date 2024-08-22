@@ -18,7 +18,6 @@ export function ProceedModal({open,setOpen, video_id}) {
     return <></>
   }
   return (
-    <>
       <Dialog
         open={open}
         handler={handleOpen}
@@ -45,6 +44,5 @@ export function ProceedModal({open,setOpen, video_id}) {
           </Button>
         </DialogFooter>
       </Dialog>
-    </>
   );
 }

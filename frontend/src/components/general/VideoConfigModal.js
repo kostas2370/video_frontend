@@ -1,14 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { getIntro, getOutro, getAvatars } from "../../api/apiService";
+import React, { useState, useEffect } from "react";
+import {
+  getIntro,
+  getOutro,
+  getAvatars,
+  updateVideo,
+} from "../../api/apiService";
 import { AssetDropBox } from "./assetDropBox";
-export const VideoConfigModal = ({
-  showModal,
-  setShowModal,
-  info_title,
-  info_intro,
-  info_outro,
-}) => {
+import { toast } from "react-toastify";
+
+export const VideoConfigModal = ({ showModal, setShowModal, info }) => {
   const [avatars, setAvatars] = useState([]);
+  const [avatar, setAvatar] = useState([]);
   const [intros, setIntros] = useState([]);
   const [outros, setOutros] = useState([]);
   const [title, setTitle] = useState(null);
@@ -17,6 +19,7 @@ export const VideoConfigModal = ({
 
   const [selectedIntroFile, setSelectedIntroFile] = useState(null);
   const [selectedOutroFile, setSelectedOutroFile] = useState(null);
+  const [selectedAvatarFile, setSelectedAvatarFile] = useState(null);
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -24,7 +27,7 @@ export const VideoConfigModal = ({
         const [avatarData, introData, outroData] = await Promise.all([
           getAvatars(),
           getIntro(),
-          getOutro()
+          getOutro(),
         ]);
         setAvatars(avatarData);
         setIntros(introData);
@@ -33,63 +36,55 @@ export const VideoConfigModal = ({
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchOptions();
   }, []);
 
   useEffect(() => {
-    setTitle(info_title);
-  }, [info_title]);
+    setTitle(info.title);
+  }, [info.title]);
 
   useEffect(() => {
-    setIntro(info_intro);
+    setIntro(info.intro);
     intros.map((item) => {
-      if (info_intro === item.id) {
+      if (info.intro === item.id) {
         setSelectedIntroFile(item?.file);
       }
     });
-  }, [info_intro]);
+  }, [info.intro]);
 
   useEffect(() => {
-    setOutro(info_outro);
+    setOutro(info.outro);
     outros.map((item) => {
-      if (info_outro === item.id) {
+      if (info.outro === item.id) {
         setSelectedOutroFile(item?.file);
       }
     });
-  }, [info_outro]);
+  }, [info.outro]);
 
-  const handleIntroChange = (event) => {
-    const selectedIntro = event.target.value;
-    setIntro(selectedIntro);
-    if (selectedIntro) {
-      intros.map((item) => {
-        if (selectedIntro === item.id.toString()) {
-          setSelectedIntroFile(item?.file);
-        }
-      });
-    } else {
-      setSelectedIntroFile("");
-    }
-  };
-
-  const handleOutroChange = (event) => {
-    const selectedOutro = event.target.value;
-    setOutro(selectedOutro);
-    if (selectedOutro) {
-      outros.map((item) => {
-        if (selectedOutro === item.id.toString()) {
-          setSelectedOutroFile(item?.file);
-        }
-      });
-    } else {
-      setSelectedOutroFile("");
-    }
-  };
+  useEffect(() => {
+    setAvatar(info.avatar);
+    avatars.map((item) => {
+      if (info.avatar === item.id) {
+        setSelectedAvatarFile(item?.file);
+      }
+    });
+  }, [info.avatar]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    alert(`Selected Intro ID: ${intro}`);
+    const formData = new FormData();
+    formData.append("intro", intro);
+    formData.append("outro", outro);
+    formData.append("title", title);
+    formData.append("avatar", avatar);
+
+    updateVideo(info.id, formData).then((response) => {
+      if (response) {
+        toast.success("video got update sucessfully !");
+        setShowModal(false);
+      }
+    });
   };
 
   return (
@@ -99,10 +94,10 @@ export const VideoConfigModal = ({
           id="crud-modal"
           tabIndex="-1"
           aria-hidden="false"
-          className="overflow-y-auto overflow-x-hidden fixed h-screen flex items-center z-50 justify-center w-full md:inset-0 backdrop-filter backdrop-blur-md max-h-full"
+          className="overflow-y-auto overflow-x-hidden fixed h-screen flex items-center z-50 justify-center w-full md:inset-0 backdrop-filter backdrop-blur-md bg-blue-gray-200 max-h-full"
         >
-          <div className="relative p-6 w-full  max-w-3xl max-h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative p-6 w-full  max-w-3xl max-h-full ">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center w-full">
                   Configure Video
@@ -154,7 +149,8 @@ export const VideoConfigModal = ({
                   </div>
                   <AssetDropBox
                     value={intro}
-                    handleChange={handleIntroChange}
+                    setValue={setIntro}
+                    setSelectedFile={setSelectedIntroFile}
                     type="intro"
                     items={intros}
                     selectedFile={selectedIntroFile}
@@ -162,13 +158,24 @@ export const VideoConfigModal = ({
                   />
                   <AssetDropBox
                     value={outro}
-                    handleChange={handleOutroChange}
+                    setValue={setOutro}
+                    setSelectedFile={setSelectedOutroFile}
                     type="outro"
                     items={outros}
                     selectedFile={selectedOutroFile}
                     className="col-span-2 sm:col-span-1"
                   />
-
+                  {info.video_type !== "TWITCH" ? (
+                    <AssetDropBox
+                      value={avatar}
+                      setValue={setAvatar}
+                      setSelectedFile={setSelectedAvatarFile}
+                      type="avatar"
+                      items={avatars}
+                      selectedFile={selectedAvatarFile}
+                      className="col-span-2 sm:col-span-1"
+                    />
+                  ) : null}
                 </div>
                 <div className="flex justify-center">
                   <button

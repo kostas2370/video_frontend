@@ -3,7 +3,7 @@ import { LOGIN_URL } from "../endpoints";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios';
+import axios from "axios";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,25 +30,32 @@ const Login = () => {
       }
 
       const data = {
-        username:username,
-        password:password
+        username: username,
+        password: password,
       };
 
-      axios.post(LOGIN_URL,data).then(response => {
-        const data =  response?.data;
-        localStorage.setItem("token", data?.tokens?.access);
-        toast.success("Login succesfully");
-        navigate("/");
-      }).catch(error => {
-        // Handle errors
-        toast.error(error.response.data.detail)
-      });
+      axios
+        .post(LOGIN_URL, data)
+        .then((response) => {
+          const data = response?.data;
+          if(data){
+            localStorage.setItem("token", data?.tokens?.access);
+            toast.success("Login succesfully");
+            navigate("/");
+            return
+          }
+         
+          
+        })
+        .catch((error) => {
+          if (error?.response?.data)
+          {toast.error(error?.response?.data.detail);}else{
+            toast.error("Server is down !")
 
-    
-      
-          } catch (error) {
-            toast.error(error)
-     
+          }
+        });
+    } catch (error) {
+      toast.error(error);
     }
   };
 

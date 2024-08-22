@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useAuth from "../useAuth";
 import { generateTwitchVideo } from "../api/apiService";
 import { format } from "date-fns";
 import { toast } from "react-toastify";

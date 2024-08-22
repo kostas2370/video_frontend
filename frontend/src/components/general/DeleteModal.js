@@ -1,29 +1,32 @@
 import React from "react";
 import { toast } from "react-toastify";
-export function DeleteModal({showModal, setShowModal, id, setItems, deleteFunction , name, mode="normal"}) {
-    const DeleteClick = (event) => {
-      deleteFunction(id).then((response)=>{
-            if (mode==="normal"){
-              toast.success(name+" deleted sucessfully")
-              setItems(prevItems => prevItems.filter(item => item.id !== id));
-              setShowModal(false)
-            }else{
-              toast.success(name+" deleted sucessfully")
-              setItems(true)
-              setShowModal(false)
+export function DeleteModal({
+  showModal,
+  setShowModal,
+  id,
+  setItems,
+  deleteFunction,
+  name,
+  mode = "normal",
+}) {
+  const DeleteClick = (event) => {
+    deleteFunction(id).then((response) => {
+      if (mode === "normal") {
+        toast.success(name + " deleted sucessfully");
+        setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        setShowModal(false);
+      } else {
+        toast.success(name + " deleted sucessfully");
+        setItems(true);
+        setShowModal(false);
+      }
+    });
+  };
 
-
-
-            }
-          
-        })
-
-    }
-
-    return (
+  return (
+    <>
+      {showModal ? (
         <>
-          {showModal ? (
-            <>
           <div
             id="deleteModal"
             tabindex="-1"
@@ -36,7 +39,6 @@ export function DeleteModal({showModal, setShowModal, id, setItems, deleteFuncti
                   type="button"
                   class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                   onClick={(e) => setShowModal(false)}
-
                 >
                   <svg
                     aria-hidden="true"

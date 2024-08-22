@@ -1,6 +1,23 @@
 import React from "react";
 
-export const AssetDropBox = ({handleChange, type, items, selectedFile, className, value }) => {
+export const AssetDropBox = ({ type, items, className, value, setValue,selectedFile, setSelectedFile }) => {
+
+
+  const handleChange = (event) => {
+    const selectedValue = event.target.value;
+    setValue(selectedValue);
+    if (selectedValue) {
+      items.map((item) => {
+        if (selectedValue === item.id.toString()) {
+          setSelectedFile(item?.file);
+        }
+      });
+    } else {
+      setSelectedFile("");
+    }
+  };
+
+
   return (
     <>
       <div className={className}>
@@ -8,7 +25,7 @@ export const AssetDropBox = ({handleChange, type, items, selectedFile, className
           htmlFor="intro"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Intro :
+          {type} :
         </label>
         <select
           name="intro"
@@ -28,12 +45,12 @@ export const AssetDropBox = ({handleChange, type, items, selectedFile, className
       </div>
 
       <div className={className}>
-        {selectedFile ? (
+        {selectedFile && type !== "avatar"? (
           <video controls key={selectedFile}>
             <source src={selectedFile} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        ) : null}
+        ) :<> {selectedFile && type === "avatar"?(<><img src={selectedFile} alt={"test"} className=" object-none p-2" /></>):null}</>}
       </div>
     </>
   );
