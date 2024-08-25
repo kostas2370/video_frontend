@@ -6,15 +6,15 @@ import {
   useParams 
 } from "react-router-dom";
 
-import Login from "./components/LoginPage";
-import Home from "./components/HomePage"
-import Register from "./components/RegisterPage";
-import Navbar from "./components/general/myNavBar";
-import Twitch from "./components/TwitchPage";
-import { Avatar } from "./components/AvatarPage";
-import { Videos } from "./components/VideosPage";
+import Login from "./pages/LoginPage";
+import Home from "./pages/HomePage"
+import Register from "./pages/RegisterPage";
+import Navbar from "./components/ui/myNavBar";
+import Twitch from "./pages/TwitchPage";
+import { Avatar } from "./pages/AvatarPage";
+import { Videos } from "./pages/VideosPage";
 import useAuth from "./useAuth";
-import { Video } from "./components/VideoPage";
+import { Video } from "./pages/VideoPage";
 function App() {
 
   useAuth()

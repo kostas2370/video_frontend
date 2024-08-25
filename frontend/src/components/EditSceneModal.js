@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { updateScene, generateScene } from "../../api/apiService";
+import {  updateScene, generateScene } from "../api/apiService";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
 export const EditSceneModal = ({

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "@rsuite/icons";
 import { getAvatars } from "../api/apiService";
-import { Card } from "./general/AvatarCards";
-import { AvatarCreationModal } from "./general/AvatarCreationModal";
+import { Card } from "../components/ui/AvatarCards";
+import { AvatarCreationModal } from "../components/AvatarCreationModal";
 
 export const Avatar = () => {
   const [avatars, setAvatars] = useState([]);

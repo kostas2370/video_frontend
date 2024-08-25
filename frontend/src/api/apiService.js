@@ -230,5 +230,58 @@ export const generateScene = async (id, data) => {
         console.error('Error fetching data:', error);
 
     }
+}
+
+
+
+export const updateSceneImage = async (id,scene_image_id, data) => {
+
+    try{
+        var url = "scene/" + id +"/change_image_scene/"
+        if (scene_image_id){
+            url = url + "?scene_image=" + scene_image_id;
+
+        }
+        const response = await httpClient.post(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
     
+}
+
+
+export const generateSceneImage = async (id, data) => {
+
+    try{
+        var url = "scene/" + id +"/generate_image_scene/"
+     
+        const response = await httpClient.post(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
+}
+
+
+
+export const createScene = async (id, data) => {
+
+    try{
+        var url = "video/" + id +"/add_scene/"
+     
+        const response = await httpClient.post(url, data);
+      
+        return response.data
+
+    }catch (error){
+        console.error('Error fetching data:', error);
+
+    }
 }

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { generateTwitchVideo } from "../api/apiService";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
-import { LoadingButton } from "./general/LoadingButton";
-import { ProceedModal } from "./general/ProceedModal";
+import { LoadingButton } from "../components/ui/LoadingButton";
+import { ProceedModal } from "../components/ProceedModal";
 
 
 const Twitch = () => {

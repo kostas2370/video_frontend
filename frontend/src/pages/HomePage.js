@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getAvatars } from "../api/apiService";
 import { toast } from "react-toastify";
 import { generateVideo } from "../api/apiService";
-import { LoadingButton } from "./general/LoadingButton";
-import { ProceedModal } from "./general/ProceedModal";
+import { LoadingButton } from "../components/ui/LoadingButton";
+import { ProceedModal } from "../components/ProceedModal";
 
 const Home = () => {
   const isOpenFunction = (data) => {

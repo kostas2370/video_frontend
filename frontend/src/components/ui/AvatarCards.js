@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "../DeleteModal";
 import { deleteAvatar } from "../../api/apiService";
 
 export const Card = ({ imageSrc, title, audioSrc, id , avatars, setAvatars }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Dropzone from "./DraggableImageInput";
-import { createAvatar, getVoices } from "../../api/apiService";
+import Dropzone from "./ui/DraggableImageInput";
+import { createAvatar, getVoices } from "../api/apiService";
 import { toast } from "react-toastify";
 
 

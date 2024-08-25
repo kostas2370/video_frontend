@@ -5,11 +5,13 @@ import { IoTrashBinSharp } from "react-icons/io5";
 import { DeleteModal } from "./DeleteModal";
 import { FaPlus } from "react-icons/fa6";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
-import { deleteImageScene } from "../../api/apiService";
+import { deleteImageScene } from "../api/apiService";
 import { EditSceneModal } from "./EditSceneModal";
+import { EditSceneImageModal } from "./EditSceneImageModal";
 export const Scene = ({ scene, setUpdated, video_type }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showEditImageModal, setShowEditImageModal] = useState(false);
 
   const MEDIA_URL = "http://localhost:8000";
 
@@ -27,7 +29,19 @@ export const Scene = ({ scene, setUpdated, video_type }) => {
       <EditSceneModal
         showModal={showEditModal}
         setShowModal={setShowEditModal}
-        scene_info={{dialogue:scene.text, id:scene.id}}
+        scene_info={{ dialogue: scene.text, id: scene.id }}
+        setUpdate={setUpdated}
+      />
+      <EditSceneImageModal
+        showModal={showEditImageModal}
+        setShowModal={setShowEditImageModal}
+        scene_info={{
+          image: MEDIA_URL + scene?.scene_image?.file,
+          scene_id: scene.id,
+          scene_image_id: scene?.scene_image?.id,
+          prompt: scene.scene_image.prompt,
+          with_audio: scene.scene_image.with_audio,
+        }}
         setUpdate={setUpdated}
       />
       <div className="grid grid-cols-2 pt-4 border pl-4 ">
@@ -94,21 +108,33 @@ export const Scene = ({ scene, setUpdated, video_type }) => {
             {scene.scene_image?.file ? (
               <>
                 {video_type !== "TWITCH" ? (
-                  <button className="bg-white p-2 pr-4 rounded-full shadow-lg hover:bg-gray-200">
+                  <button
+                    className="bg-white p-2 pr-4 rounded-full shadow-lg hover:bg-gray-200"
+                    onClick={(e) => {
+                      setShowEditImageModal(true);
+                    }}
+                  >
                     <HiOutlinePencilSquare className="text-green-500 w-5 h-5" />
                   </button>
                 ) : null}
-                <button className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-200">
-                  <IoTrashBinSharp
-                    className="text-red-500"
-                    onClick={(e) => {
-                      setShowDeleteModal(true);
-                    }}
-                  />
+                <button
+                  onClick={(e) => {
+                    setShowDeleteModal(true);
+                  }}
+                  className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-200"
+                >
+                  <IoTrashBinSharp className="text-red-500" />
                 </button>
               </>
             ) : (
-              <FaPlus className="text-orange-500" />
+              <button
+                onClick={(e) => {
+                  setShowEditImageModal(true);
+                }}
+                className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-200"
+              >
+                <FaPlus className="text-orange-500" />
+              </button>
             )}
           </div>
         </div>

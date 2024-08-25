@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DefaultTable } from "./general/Table";
-import useAuth from "../useAuth";
+import { DefaultTable } from "../components/Table";
 import { getVideos } from "../api/apiService";
 import { Search } from "@rsuite/icons";
 import { useSearchParams } from "react-router-dom";

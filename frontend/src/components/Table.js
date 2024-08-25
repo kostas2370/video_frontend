@@ -3,7 +3,7 @@ import {  useState } from "react";
 import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { DeleteModal} from "./DeleteModal";
-import { deleteVideo } from "../../api/apiService";
+import { deleteVideo } from "../api/apiService";
 import { VideoInfoModal } from "./VideoInfoModal";
 import { GiProcessor } from "react-icons/gi";
 import { RenderModal } from "./RenderModal";
