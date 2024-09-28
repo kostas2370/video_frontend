@@ -103,7 +103,7 @@ export const Video = () => {
             <FaPlus
               className="text-orange-500 w-5 h-5"
               onClick={(e) => {
-                setShowAddSceneModal(true);
+                setShowAddTwitchSceneModal(true);
               }}
             />
           </button>

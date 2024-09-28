@@ -21,13 +21,12 @@ export function RenderModal({ showModal, setShowModal, id, setItems, name }) {
             item.id === id
               ? {
                   ...item,
-                  status: response.result.status,
-                  output: response.result.output,
+                  status: "RENDERING",
+                  
                 }
               : item
           )
         );
-        toast.success("Video now is completed");
       } else {
         setItems((prevItems) =>
           prevItems.map((item) =>

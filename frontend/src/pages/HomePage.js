@@ -27,8 +27,8 @@ const Home = () => {
     style: "natural",
     music: "",
     provider: "",
-    subtitles: true,
-    avatar_position:"top,left"
+    subtitles: false,
+    avatar_position:"right,top"
   });
 
  const axiosPrivateInstance = useAxiosPrivate()

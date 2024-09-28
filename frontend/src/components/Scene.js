@@ -80,7 +80,7 @@ export const Scene = ({ scene, setUpdated, video_type }) => {
                 </button>
 
               <audio controls key={scene.file}>
-                <source src={MEDIA_URL + scene.file ?? ""} />
+                <source src={MEDIA_URL + scene?.file ?? ""} />
               </audio>
             </>
           ) : null}
@@ -95,12 +95,12 @@ export const Scene = ({ scene, setUpdated, video_type }) => {
           </div>
         </div>
         <div className="relative inline-block">
-          {scene.scene_image?.file &&
-          scene.scene_image?.file.includes("mp4") ? (
+          {scene?.scene_image?.file &&
+          scene?.scene_image?.file.includes("mp4") ? (
             <>
               <video
                 controls
-                src={MEDIA_URL + scene.scene_image.file}
+                src={MEDIA_URL + scene?.scene_image?.file}
                 className="object-cover h-48 w-96 "
               ></video>
             </>
