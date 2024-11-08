@@ -64,11 +64,12 @@ export const Video = () => {
         id={videoInfo?.id}
         setItems={setUpdated}
       />
-
+showModal, setShowModal, id, setItems, name
       <RenderModal
         showModal={showRenderModal}
         setShowModal={setShowRenderModal}
         id={videoId}
+        setItems={() => {}}
       />
 
       <div className="flex flex-col items-center">

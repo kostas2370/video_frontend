@@ -14,9 +14,6 @@ export const AvatarCreationModal = ({ showModal, setShowModal, setAvatars }) => 
 
 
 
-
-
-
   useEffect(() => {
     const fetchVoiceOption = async () => {
       getVoices().then((response) => {
